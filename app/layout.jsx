@@ -1,5 +1,5 @@
 export default function RootLayout({ children }) {
-    console.log(children)
+    const abc = ''
     return (
         <html lang='pt-br'>
             <body>
