@@ -1,10 +1,9 @@
-export default function RootLayout({ children }) {
-    const abc = ''
+const  RootLayout = ({ children }) => {
     return (
-        <html lang='pt-br'>
+        <html lang='pt-BR'>
             <body>
                 <header>
-                    <h2>Análise de Jogos</h2>
+                  <h2>Análise de Jogos</h2>
                 </header>
                 <main>{children}</main>
                 <footer>Rodapé</footer>
@@ -12,3 +11,5 @@ export default function RootLayout({ children }) {
         </html>
     )
 }
+
+export default RootLayout
