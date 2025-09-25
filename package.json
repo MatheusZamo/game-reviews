@@ -2,7 +2,8 @@
     "name": "game-reviews",
     "private": "true",
     "scripts": {
-        "dev": "next dev"
+        "dev": "next dev",
+        "build": "next build"
     },
     "dependencies": {
         "eslint": "8.57.0",
