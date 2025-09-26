@@ -1,4 +1,5 @@
 import Link from "next/link"
+import './globals.css'
 
 const  RootLayout = ({ children }) => {
     return (
@@ -13,7 +14,7 @@ const  RootLayout = ({ children }) => {
                     <li><Link href='/sobre' prefetch={false}>Sobre</Link></li>
                 </ul>
                 <main>{children}</main>
-                <footer>Rodapé</footer>
+                <footer>Informações e imagens dos jogos gentilmente cedidos por <a href="https://rawg.io/" target='_blank'>RAWG</a></footer>
             </body>
         </html>
     )
