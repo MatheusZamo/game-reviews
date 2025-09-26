@@ -1,7 +1,9 @@
+import Heading1 from "@/components/heading1"
+
 const Mario = () => {
     return(
         <>
-          <h1>Super Mario Bros. Wonder - Análise</h1>
+          <Heading1>Super Mario Bros. Wonder - Análise</Heading1>
           <p>Análise de Super Mario Bros. Wonder aqui</p>
         </>
     )

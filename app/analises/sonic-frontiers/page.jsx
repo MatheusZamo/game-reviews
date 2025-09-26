@@ -1,7 +1,9 @@
+import Heading1 from "@/components/heading1"
+
 const Sonic = () => {
     return(
         <>
-          <h1>Sonic Frontiers - Análise</h1>
+          <Heading1>Sonic Frontiers - Análise</Heading1>
           <p>Análise de Sonic Frontiers aqui</p>
         </>
     )

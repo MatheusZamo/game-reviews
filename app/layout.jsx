@@ -1,23 +1,23 @@
-import Link from "next/link"
 import './globals.css'
+import NavBar from '@/components/nav-bar'
 
-const  RootLayout = ({ children }) => {
-    return (
-        <html lang='pt-BR'>
-            <body>
-                <header>
-                  <h2>Análise de Jogos</h2>
-                </header>
-                <ul>
-                    <li><Link href='/'>Inicio</Link></li>
-                    <li><Link href='/analise'>Análise</Link></li>
-                    <li><Link href='/sobre' prefetch={false}>Sobre</Link></li>
-                </ul>
-                <main>{children}</main>
-                <footer>Informações e imagens dos jogos gentilmente cedidos por <a href="https://rawg.io/" target='_blank'>RAWG</a></footer>
-            </body>
-        </html>
-    )
+const RootLayout = ({ children }) => {
+  return (
+    <html lang="pt-BR">
+      <body className="bg-slate-800 text-slate-200 flex flex-col px-6 py-2 min-h-screen">
+        <header>
+          <NavBar />
+        </header>
+        <main className="grow py-3">
+          {children}
+        </main>
+        <footer className="border-t border-t-slate-600 py-3 text-center text-xs">
+          Informações e imagens dos jogos gentilmente cedidos por{' '}
+          <a href="https://rawg.io/" target="_blank" className="hover:text-sky-500">RAWG</a>
+        </footer>
+      </body>
+    </html>
+  )
 }
 
 export default RootLayout
