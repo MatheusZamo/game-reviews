@@ -10,7 +10,7 @@ const  RootLayout = ({ children }) => {
                 <ul>
                     <li><Link href='/'>Inicio</Link></li>
                     <li><Link href='/analise'>Análise</Link></li>
-                    <li><Link href='/sobre'>Sobre</Link></li>
+                    <li><Link href='/sobre' prefetch={false}>Sobre</Link></li>
                 </ul>
                 <main>{children}</main>
                 <footer>Rodapé</footer>
