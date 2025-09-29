@@ -31,7 +31,7 @@ const Reviews = () => {
                     className='rounded-t-lg'
                     priority
                   />
-                  <p className='text-center mt-2 text-lg font-montserrat'>{review.title}</p>
+                  <p className='text-center mt-2 text-base font-montserrat'>{review.title}</p>
                 </Link>
             </li>
             ))}
