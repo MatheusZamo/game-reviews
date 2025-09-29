@@ -28,7 +28,8 @@ const Reviews = () => {
                     alt='super-mario-bros-wonder'
                     width={320}
                     height={180}
-                    className='rounded-lg'
+                    className='rounded-t-lg'
+                    priority
                   />
                   <p className='text-center mt-2 text-lg font-montserrat'>{review.title}</p>
                 </Link>
