@@ -1,9 +1,16 @@
 import './globals.css'
 import NavBar from '@/components/nav-bar'
+import { Montserrat } from 'next/font/google'
+
+const montserrat = Montserrat({
+  subsets: ['latin'],
+  weight: ['700'],
+  variable: '--font-montserrat'
+})
 
 const RootLayout = ({ children }) => {
   return (
-    <html lang="pt-BR">
+    <html lang="pt-BR" className={montserrat.variable}>
       <body className="bg-slate-800 text-slate-200 flex flex-col px-6 py-2 min-h-screen">
         <header>
           <NavBar />

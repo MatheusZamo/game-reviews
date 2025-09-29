@@ -3,7 +3,11 @@
 module.exports = {
   content: ['./app/**/*.jsx','./components/**/*.jsx'],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        montserrat: ['var(--font-montserrat)']
+      }
+    },
   },
   plugins: [],
 }
