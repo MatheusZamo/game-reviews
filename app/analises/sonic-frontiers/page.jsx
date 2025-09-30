@@ -1,7 +1,13 @@
+import { readFile } from 'node:fs/promises'
+import { parse } from 'marked'
+import DOMPurify from 'isomorphic-dompurify'
 import Heading1 from "@/components/heading1"
 import Image from "next/image"
 
-const Sonic = () => {
+const Sonic = async () => {
+  const review = await readFile(
+  `${process.cwd()}/content/reviews/sonic-frontiers.md`, 
+    { encoding: 'utf-8'})
     return(
         <>
           <Heading1>Sonic Frontiers - Análise</Heading1>
@@ -13,7 +19,7 @@ const Sonic = () => {
             priority
             className='rounded-lg mt-5 mb-5'
           />
-          <p>Análise de Sonic Frontiers aqui</p>
+          <article dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(parse(review)) }} />
         </>
     )
 }
