@@ -1,3 +1,7 @@
+# Sonic Frontiers - Análise
+08/05/2024
+![Sonic-Frontiers](/sonic-frontiers.jpg)
+
 __Sonic Frontiers__ (ソニックフロンティア Sonikku Furontia?) é um jogo eletrônico de ação e aventura da Sega, pertancente a série Sonic the Hedgehog e desenvolvido pela Sonic Team, sendo a estreia do estilo "mundo aberto" na série.
 
 Foi lançado em 8 de novembro de 2022 para Microsoft Windows, Nintendo Switch, PlayStation 4, PlayStation 5, Xbox One e Xbox Series X/S. 
