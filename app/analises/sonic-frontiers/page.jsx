@@ -19,7 +19,10 @@ const Sonic = async () => {
             priority
             className='rounded-lg mt-5 mb-5'
           />
-          <article dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(parse(review)) }} />
+          <article 
+            class="prose"
+            dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(parse(review)) }} 
+          />
         </>
     )
 }

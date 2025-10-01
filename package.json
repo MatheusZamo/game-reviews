@@ -7,6 +7,7 @@
         "start": "next start"
     },
     "dependencies": {
+        "@tailwindcss/typography": "0.5.13",
         "eslint": "8.57.0",
         "eslint-config-next": "14.2.2",
         "isomorphic-dompurify": "2.9.0",
