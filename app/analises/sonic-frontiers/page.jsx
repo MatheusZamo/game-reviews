@@ -8,7 +8,7 @@ const Sonic = async () => {
     { encoding: 'utf-8'})
     return(
           <article 
-            class="prose"
+            class="prose text-slate-200 prose-strong:text-slate-200"
             dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(parse(review)) }} 
           />
     )
