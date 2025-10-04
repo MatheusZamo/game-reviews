@@ -5,9 +5,9 @@ import matter from 'gray-matter'
 import Heading1 from "@/components/heading1"
 import Image from "next/image"
 
-const Sonic = async () => {
+const GameReview = async ({ params }) => {
   const review = await readFile(
-  `${process.cwd()}/content/reviews/sonic-frontiers.md`, 
+  `${process.cwd()}/content/reviews/${params.slug}.md`, 
     { encoding: 'utf-8'})
 
   const { content, data } = matter(review)
@@ -32,4 +32,4 @@ const Sonic = async () => {
     )
 }
 
-export default Sonic
+export default GameReview
