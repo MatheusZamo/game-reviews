@@ -1,26 +1,20 @@
+import { readdir, readFile} from 'node:fs/promises'
+import matter from 'gray-matter'
 import Link from "next/link"
 import Heading1 from "@/components/heading1"
 import Image from "next/image"
 
-const reviews = [
-  {
-    title: 'Super Mario Bros. Wonder',
-    path: '/analises/super-mario-bros-wonder',
-    img: '/super-mario-bros-wonder.jpg'
-  }, 
-  {
-    title: 'Sonic Frontiers',
-    path: '/analises/sonic-frontiers',
-    img: '/sonic-frontiers.jpg'
-  },
-  {
-    title: 'Bloodborne',
-    path: '/analises/bloodborne',
-    img: '/bloodborne.jpg'
-  }
-]
+const Reviews = async () => {
+  const files = await readdir(`${process.cwd()}/content/reviews/`)
+  const reviewPromises = files.map(async file => {
+    const slug = file.replace('.md','')
+    const review = await readFile(`${process.cwd()}/content/reviews/${slug}.md`, { encoding: 'utf-8'})
+    const { data: { title, img } } = matter(review)
+    return { title, img, path: `/analises/${slug}`}
+  })
 
-const Reviews = () => {
+  const reviews = await Promise.all(reviewPromises)
+
     return(
         <>
           <Heading1>Análises</Heading1>
