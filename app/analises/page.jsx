@@ -12,6 +12,11 @@ const reviews = [
     title: 'Sonic Frontiers',
     path: '/analises/sonic-frontiers',
     img: '/sonic-frontiers.jpg'
+  },
+  {
+    title: 'Bloodborne',
+    path: '/analises/bloodborne',
+    img: '/bloodborne.jpg'
   }
 ]
 
