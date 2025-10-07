@@ -1,9 +1,14 @@
-import { readFile } from 'node:fs/promises'
+import { readFile, readdir } from 'node:fs/promises'
 import { parse } from 'marked'
 import DOMPurify from 'isomorphic-dompurify'
 import matter from 'gray-matter'
 import Heading1 from "@/components/heading1"
 import Image from "next/image"
+
+export const generateStaticParams = async () => {
+   const files = await readdir(`${process.cwd()}/content/reviews`)
+   return files.map(file => ({ slug: file.replace('.md', '')}))
+}
 
 const GameReview = async ({ params }) => {
   const review = await readFile(
@@ -15,7 +20,7 @@ const GameReview = async ({ params }) => {
     return(
         <>
           <Heading1>{data.title}</Heading1>
-          <time datetime={data.date}>{`${day}/${month}/${year}`}</time>
+          <time dateTime={data.date}>{`${day}/${month}/${year}`}</time>
           <Image 
             src={data.img}
             alt='imagem do sonic-frontiers' 
