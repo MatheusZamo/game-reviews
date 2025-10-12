@@ -3,11 +3,7 @@ import Image from "next/image"
 import { getReviews } from "./lib/get-reviews"
 
 const Home = async () => {
-  const reviews = await getReviews()
-  const [mostRecentReview] = reviews.toSorted((a,b) => {
-    const [aDay, bDay] = [a, b].map(({ date }) => Number(date.split('-')[2]))
-    return aDay - bDay
-  })
+  const [mostRecentReview] = await getReviews()
   
   return (
     <>

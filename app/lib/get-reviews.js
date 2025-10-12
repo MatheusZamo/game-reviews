@@ -8,7 +8,11 @@ const getReviews = async () => {
         return { title, img, date, path: `/analises/${slug}`}
     })
 
-    return Promise.all(reviewPromises)
+    const reviews = await Promise.all(reviewPromises)
+    return reviews.toSorted((a,b) => {
+    const [aDay, bDay] = [a, b].map(({ date }) => Number(date.split('-')[2]))
+    return aDay - bDay
+  })
 }
 
 export { getReviews }
