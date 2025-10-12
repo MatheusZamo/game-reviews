@@ -4,6 +4,10 @@ import Heading1 from "@/components/heading1"
 import Image from "next/image"
 import { getReviews } from "../lib/get-reviews"
 
+const metadata = {
+  title: 'Análises'
+}
+
 const Reviews = async () => {
   const reviews = await getReviews()
     return(
@@ -31,3 +35,4 @@ const Reviews = async () => {
 }
 
 export default Reviews
+export { metadata }

@@ -8,6 +8,13 @@ const montserrat = Montserrat({
   variable: '--font-montserrat'
 })
 
+const metadata = {
+  title: {
+    template: '%s | Análises de Jogos',
+    default: 'Análises de Jogos'
+  }
+}
+
 const RootLayout = ({ children }) => {
   return (
     <html lang="pt-BR" className={montserrat.variable}>
@@ -28,3 +35,4 @@ const RootLayout = ({ children }) => {
 }
 
 export default RootLayout
+export { metadata }

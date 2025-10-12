@@ -1,5 +1,9 @@
 import Heading1 from "@/components/heading1"
 
+const metadata = {
+  title: 'Sobre'
+}
+
 const About = () => {
     return (
         <>
@@ -10,3 +14,4 @@ const About = () => {
 }
 
 export default About
+export { metadata }

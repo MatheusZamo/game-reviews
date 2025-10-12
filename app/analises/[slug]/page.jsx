@@ -5,10 +5,16 @@ import matter from 'gray-matter'
 import Heading1 from "@/components/heading1"
 import Image from "next/image"
 import { getReviewSlugs } from '@/app/lib/get-review-slug'
+import { getReview } from '@/app/lib/get-review'
 
 export const generateStaticParams = async () => {
    const slugs = await getReviewSlugs()
    return slugs.map(slug => ({ slug }))
+}
+
+const generateMetadata = async ({ params }) => {
+  const { title } = await getReview(params.slug)
+  return { title }
 }
 
 const GameReview = async ({ params }) => {
@@ -39,3 +45,4 @@ const GameReview = async ({ params }) => {
 }
 
 export default GameReview
+export { generateMetadata }

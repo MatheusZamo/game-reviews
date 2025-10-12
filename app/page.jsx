@@ -2,6 +2,10 @@ import Link from "next/link"
 import Image from "next/image"
 import { getReviews } from "./lib/get-reviews"
 
+const metadata = {
+  description: 'Análises de jogos é onde você encontra análises de jogos para Xbox, Playstation, Nintendo e PC.'
+}
+
 const Home = async () => {
   const [mostRecentReview] = await getReviews()
   
@@ -28,3 +32,4 @@ const Home = async () => {
 }
 
 export default Home
+export { metadata }
