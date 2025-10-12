@@ -9,10 +9,7 @@ const getReviews = async () => {
     })
 
     const reviews = await Promise.all(reviewPromises)
-    return reviews.toSorted((a,b) => {
-    const [aDay, bDay] = [a, b].map(({ date }) => Number(date.split('-')[2]))
-    return aDay - bDay
-  })
+    return reviews.toSorted((a,b) => b.date.localeCompare(a.date))
 }
 
 export { getReviews }
