@@ -1,6 +1,6 @@
 import Link from "next/link"
 import Image from "next/image"
-import { orderedReviews } from "./utils/ordered-reviews"
+import { orderedReviews } from "./lib/get-review"
 
 const Home = async () => {
 const reviews = await orderedReviews()

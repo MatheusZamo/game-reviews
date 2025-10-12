@@ -1,13 +1,14 @@
-import { readFile, readdir } from 'node:fs/promises'
+import { readFile } from 'node:fs/promises'
 import { parse } from 'marked'
 import DOMPurify from 'isomorphic-dompurify'
 import matter from 'gray-matter'
 import Heading1 from "@/components/heading1"
 import Image from "next/image"
+import { getReviewSlugs } from '@/app/lib/get-review-slug'
 
 export const generateStaticParams = async () => {
-   const files = await readdir(`${process.cwd()}/content/reviews`)
-   return files.map(file => ({ slug: file.replace('.md', '')}))
+   const slugs = await getReviewSlugs()
+   return slugs.map(slug => ({ slug }))
 }
 
 const GameReview = async ({ params }) => {
