@@ -1,16 +1,9 @@
 import Link from "next/link"
 import Image from "next/image"
-import { getReviewSlugs } from "./lib/get-review-slug"
-import { getReview } from "./lib/get-review"
+import { getReviews } from "./lib/get-reviews"
 
 const Home = async () => {
-  const slugs = await getReviewSlugs()
-  const reviewPromises = slugs.map(async slug => {
-    const { title, img, date } = await getReview(slug)
-    return { title, img, date, path: `/analises/${slug}`}
-  })
-
-  const reviews = await Promise.all(reviewPromises)
+  const reviews = await getReviews()
   const [mostRecentReview] = reviews.toSorted((a,b) => {
     const [aDay, bDay] = [a, b].map(({ date }) => Number(date.split('-')[2]))
     return aDay - bDay
