@@ -1,15 +1,24 @@
-const { getReview } = require("./get-review")
-const { getReviewSlugs } = require("./get-review-slug")
+import { stringify } from "qs"
 
-const getReviews = async () => {
-    const slugs = await getReviewSlugs()
-    const reviewPromises = slugs.map(async slug => {
-        const { title, img, date } = await getReview(slug)
-        return { title, img, date, path: `/analises/${slug}`}
-    })
+const cmsBaseUrl = 'http://localhost:1337'
 
-    const reviews = await Promise.all(reviewPromises)
-    return reviews.toSorted((a,b) => b.date.localeCompare(a.date))
-}
+const query = "?" + stringify({
+    fields: ['slug', 'title', 'subtitle', 'publishedAt'],
+    populate: { image: { fields: ['url'] } },
+    pagination: { pageSize: 6 },
+    sort: ['publishedAt:desc']
+}, { encodeValuesOnly: true })
+
+const getReviews = async () => fetch(`${cmsBaseUrl}/api/reviews${query}`)
+    .then(res => res.json())
+    .then(reviews => reviews.data.map(({ attributes }) => ({
+            title: attributes.title,
+            img: `${cmsBaseUrl}${attributes.image.data.attributes.url}`,
+            date: attributes.publishedAt.split('T')[0],
+            path: attributes.slug,
+        })))
+    .catch(console.log)
+
+
 
 export { getReviews }
