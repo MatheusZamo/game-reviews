@@ -35,7 +35,7 @@ const GameReview = async ({ params }) => {
             className='rounded-lg mt-5 mb-5'
           />
           <article 
-            className="prose"
+            className="prose text-slate-200 prose-strong:text-slate-200 prose-h3:text-slate-200"
             dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(parse(content)) }} 
           />
         </>

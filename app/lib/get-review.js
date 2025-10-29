@@ -1,11 +1,33 @@
-import { readFile} from 'node:fs/promises'
-import matter from 'gray-matter'
+import { stringify } from "qs"
 
-const getReview = async slug => {
-  const review = await readFile(`${process.cwd()}/content/reviews/${slug}.md`, { encoding: 'utf-8'})
-  const { content, data: { title, img, date } } = matter(review)
-  return { content, title, img, date }
+const cmsBaseUrl = 'http://localhost:1337'
+
+const getReview = async (slug) => {
+  const query = "?" + stringify({
+    filters: { slug: { $eq: slug } },
+    fields: ['slug', 'title', 'subtitle', 'publishedAt', 'body'],
+    populate: { image: { fields: ['url'] } },
+    pagination: { pageSize: 1, withCount: false },
+  }, { encodeValuesOnly: true })
+
+
+ return  (
+  fetch(`${cmsBaseUrl}/api/reviews${query}`)
+    .then(res => res.json())
+    .then(review => {
+      const { attributes } = review.data[0]
+
+      return {
+        title: attributes.title,
+        img: `${cmsBaseUrl}${attributes.image.data.attributes.url}`,
+        date: attributes.publishedAt.split('T')[0],
+        content: attributes.body,
+      }
+    })
+    .catch(console.log)
+ )
 
 }
+
 
 export { getReview }

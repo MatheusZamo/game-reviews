@@ -15,7 +15,7 @@ const getReviews = async () => fetch(`${cmsBaseUrl}/api/reviews${query}`)
             title: attributes.title,
             img: `${cmsBaseUrl}${attributes.image.data.attributes.url}`,
             date: attributes.publishedAt.split('T')[0],
-            path: attributes.slug,
+            path: `/analises/${attributes.slug}`,
         })))
     .catch(console.log)
 
