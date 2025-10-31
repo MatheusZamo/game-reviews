@@ -2,14 +2,10 @@ import { parse } from 'marked'
 import DOMPurify from 'isomorphic-dompurify'
 import Heading1 from "@/components/heading1"
 import Image from "next/image"
-import { getReviewSlugs } from '@/app/lib/get-review-slug'
 import { getReview } from '@/app/lib/get-review'
 import ShareReviewButton from '@/components/share-review-button'
 
-export const generateStaticParams = async () => {
-   const slugs = await getReviewSlugs()
-   return slugs.map(slug => ({ slug }))
-}
+const dynamic = 'force-dynamic'
 
 const generateMetadata = async ({ params }) => {
   const { title } = await getReview(params.slug)
@@ -44,4 +40,4 @@ const GameReview = async ({ params }) => {
 }
 
 export default GameReview
-export { generateMetadata }
+export { generateMetadata, dynamic }

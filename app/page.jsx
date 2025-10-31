@@ -6,6 +6,8 @@ const metadata = {
   description: 'Análises de jogos é onde você encontra análises de jogos para Xbox, Playstation, Nintendo e PC.'
 }
 
+const dynamic = 'force-dynamic'
+
 const Home = async () => {
   const reviews = await getReviews({ quantity: 4 })
   
@@ -34,4 +36,4 @@ const Home = async () => {
 }
 
 export default Home
-export { metadata }
+export { metadata, dynamic }

@@ -12,7 +12,7 @@ const getReview = async (slug) => {
 
 
  return  (
-  fetch(`${cmsBaseUrl}/api/reviews${query}`)
+  fetch(`${cmsBaseUrl}/api/reviews${query}`, { next: { revalidate: 0 } })
     .then(res => res.json())
     .then(review => {
       const { attributes } = review.data[0]
