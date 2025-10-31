@@ -7,27 +7,29 @@ const metadata = {
 }
 
 const Home = async () => {
-  const [mostRecentReview] = await getReviews()
+  const reviews = await getReviews({ quantity: 4 })
   
   return (
-    <>
-      <div className="rounded-lg border-2 border-slate-700 w-1/2 hover:shadow-lg">
-        <Link href={mostRecentReview.path} className="flex">
-          <Image
-            src={mostRecentReview.img}
-            width="320"
-            height="180"
-            alt=""
-            priority
-            className="rounded-l-lg"
-          />
-          <div className="p-3">
-            <h2 className="text-xl font-montserrat">{mostRecentReview.title}</h2>
-            <p>Breve parágrafo aqui</p>
-          </div>
-        </Link>
-      </div>
-    </>
+    <div className='flex flex-wrap gap-3'>
+      {reviews.map(review => (
+        <div key={review.title} className="rounded-lg border-2 border-slate-700 w-[640px] hover:shadow-lg">
+          <Link href={review.path} className="flex">
+           <Image
+             src={review.img}
+             width="320"
+             height="180"
+             alt=""
+             priority
+             className="rounded-l-lg"
+           />
+            <div className="p-3">
+             <h2 className="text-xl font-montserrat">{review.title}</h2>
+             <p>{review.subtitle}</p>
+           </div>
+          </Link>
+        </div>
+      ))}
+    </div>
   )
 }
 

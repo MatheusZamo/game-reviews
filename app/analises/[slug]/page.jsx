@@ -17,11 +17,12 @@ const generateMetadata = async ({ params }) => {
 }
 
 const GameReview = async ({ params }) => {
-  const { content, date, title, img } = await getReview(params.slug)
+  const { content, date, title, img, subtitle } = await getReview(params.slug)
   const [ year, month, day ] = date.split('-')
     return(
         <>
           <Heading1>{title}</Heading1>
+          <p className='mb-3'>{subtitle}</p>
           <div className="flex gap-4 items-baseline">
             <time dateTime={date}>{`${day}/${month}/${year}`}</time>
             <ShareReviewButton />

@@ -1,12 +1,12 @@
 import { stringify } from "qs"
 
-const cmsBaseUrl = 'http://localhost:1337'
+const query = "?" + stringify({
+  fields: ['slug'],
+  sort: ['publishedAt:desc'],
+  pagination: { pageSize: 100 },
+}, { encodeValuesOnly: true })
 
-  const query = "?" + stringify({
-    fields: ['slug'],
-    sort: ['publishedAt:desc'],
-    pagination: { pageSize: 100 },
-  }, { encodeValuesOnly: true })
+const cmsBaseUrl = 'http://localhost:1337'
 
 const getReviewSlugs = async () => fetch(`${cmsBaseUrl}/api/reviews${query}`)
     .then(res => res.json())
