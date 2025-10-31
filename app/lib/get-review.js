@@ -22,6 +22,7 @@ const getReview = async (slug) => {
         img: `${cmsBaseUrl}${attributes.image.data.attributes.url}`,
         date: attributes.publishedAt.split('T')[0],
         content: attributes.body,
+        subtitle: attributes.subtitle
       }
     })
     .catch(console.log)
