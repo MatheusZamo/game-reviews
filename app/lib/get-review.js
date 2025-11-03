@@ -15,8 +15,10 @@ const getReview = async (slug) => {
   fetch(`${cmsBaseUrl}/api/reviews${query}`, { next: { revalidate: 0 } })
     .then(res => res.json())
     .then(review => {
+      if (review.data.length === 0) {
+        return null
+      }
       const { attributes } = review.data[0]
-
       return {
         title: attributes.title,
         img: `${cmsBaseUrl}${attributes.image.data.attributes.url}`,

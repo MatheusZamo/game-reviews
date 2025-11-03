@@ -10,14 +10,17 @@ const dynamic = 'force-dynamic'
 
 
 const generateMetadata = async ({ params }) => {
-  if (await getReview(params.slug) === undefined) notFound()
+  const review = await getReview(params.slug)
+  if (!review) notFound()
 
-  const { title } = await getReview(params.slug)
-  return { title }
+  return { title: review.title }
 }
 
 const GameReview = async ({ params }) => {
-  const { content, date, title, img, subtitle } = await getReview(params.slug)
+  const review = await getReview(params.slug)
+  if (!review) notFound()
+
+  const { content, date, title, img, subtitle } = review
   const [ year, month, day ] = date.split('-')
     return(
         <>
