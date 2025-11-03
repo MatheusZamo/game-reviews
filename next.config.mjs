@@ -9,6 +9,9 @@ const nextConfig = {
             port: '1337',
             pathname: '/uploads/**'
         }]
+    },
+    experimental: {
+        globalNotFound: true,
     }
 }
 

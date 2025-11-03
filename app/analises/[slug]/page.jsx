@@ -4,10 +4,14 @@ import Heading1 from "@/components/heading1"
 import Image from "next/image"
 import { getReview } from '@/app/lib/get-review'
 import ShareReviewButton from '@/components/share-review-button'
+import { notFound } from 'next/navigation'
 
 const dynamic = 'force-dynamic'
 
+
 const generateMetadata = async ({ params }) => {
+  if (await getReview(params.slug) === undefined) notFound()
+
   const { title } = await getReview(params.slug)
   return { title }
 }
