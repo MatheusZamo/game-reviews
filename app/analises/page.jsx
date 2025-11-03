@@ -8,6 +8,8 @@ const metadata = {
   title: 'Análises'
 }
 
+const dynamic = 'force-dynamic'
+
 const Reviews = async () => {
   const reviews = await getReviews({ quantity: 12 })
     return(
@@ -36,4 +38,4 @@ const Reviews = async () => {
 }
 
 export default Reviews
-export { metadata }
+export { metadata, dynamic }
