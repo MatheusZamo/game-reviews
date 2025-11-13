@@ -11,7 +11,7 @@ const getReviews = async ({ quantity }) => {
 const cmsBaseUrl = 'http://localhost:1337'
 
     return(
-     fetch(`${cmsBaseUrl}/api/reviews${query}`, { next: { revalidate: 0 } })
+     fetch(`${cmsBaseUrl}/api/reviews${query}`, { next: { tags: ['reviews'] } })
       .then(res => res.json())
       .then(reviews => reviews.data.map(({ attributes }) => ({
         title: attributes.title,

@@ -12,7 +12,7 @@ const getReview = async (slug) => {
 
 
  return  (
-  fetch(`${cmsBaseUrl}/api/reviews${query}`, { next: { revalidate: 0 } })
+  fetch(`${cmsBaseUrl}/api/reviews${query}`, { next: { tags: ['reviews'] } })
     .then(res => res.json())
     .then(review => {
       if (review.data.length === 0) {
