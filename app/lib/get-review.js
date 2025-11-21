@@ -1,6 +1,5 @@
 import { stringify } from "qs"
-
-const cmsBaseUrl = "http://localhost:1337"
+import { cmsBaseUrl } from "./cms-base-url"
 
 const getReview = async slug => {
   const query =

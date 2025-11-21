@@ -2,7 +2,6 @@ import Link from "next/link"
 import Heading1 from "@/components/heading1"
 import Image from "next/image"
 import { getReviews } from "../lib/get-reviews"
-import { ArrowLeft } from "lucide-react"
 
 const metadata = {
   title: "Análises",
@@ -11,7 +10,7 @@ const metadata = {
 const dynamic = "force-dynamic"
 
 const Reviews = async () => {
-  const reviews = await getReviews({ quantity: 12 })
+  const reviews = await getReviews({ quantity: 8 })
   return (
     <>
       <Heading1>Análises</Heading1>

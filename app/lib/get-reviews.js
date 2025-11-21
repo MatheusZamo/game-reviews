@@ -1,4 +1,5 @@
 import { stringify } from "qs"
+import { cmsBaseUrl } from "./cms-base-url"
 
 const getReviews = async ({ quantity }) => {
   const query =
@@ -12,8 +13,6 @@ const getReviews = async ({ quantity }) => {
       },
       { encodeValuesOnly: true }
     )
-
-  const cmsBaseUrl = "http://localhost:1337"
 
   return fetch(`${cmsBaseUrl}/api/reviews${query}`, {
     next: { tags: ["reviews"] },
