@@ -1,23 +1,15 @@
-import { stringify } from "qs"
 import { cmsBaseUrl } from "./cms-base-url"
+import { fetchReviews } from "./fetch-reviews"
 
 const getReview = async slug => {
-  const query =
-    "?" +
-    stringify(
-      {
-        filters: { slug: { $eq: slug } },
-        fields: ["slug", "title", "subtitle", "publishedAt", "body"],
-        populate: { image: { fields: ["url"] } },
-        pagination: { pageSize: 1, withCount: false },
-      },
-      { encodeValuesOnly: true }
-    )
+  const queryParameters = {
+    filters: { slug: { $eq: slug } },
+    fields: ["slug", "title", "subtitle", "publishedAt", "body"],
+    populate: { image: { fields: ["url"] } },
+    pagination: { pageSize: 1, withCount: false },
+  }
 
-  return fetch(`${cmsBaseUrl}/api/reviews${query}`, {
-    next: { tags: ["reviews"] },
-  })
-    .then(res => res.json())
+  return fetchReviews(queryParameters)
     .then(review => {
       if (review.data.length === 0) {
         return null

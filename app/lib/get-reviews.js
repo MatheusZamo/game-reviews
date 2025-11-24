@@ -1,23 +1,15 @@
-import { stringify } from "qs"
 import { cmsBaseUrl } from "./cms-base-url"
+import { fetchReviews } from "./fetch-reviews"
 
 const getReviews = async ({ quantity }) => {
-  const query =
-    "?" +
-    stringify(
-      {
-        fields: ["slug", "title", "subtitle", "publishedAt"],
-        populate: { image: { fields: ["url"] } },
-        pagination: { pageSize: quantity },
-        sort: ["publishedAt:desc"],
-      },
-      { encodeValuesOnly: true }
-    )
+  const queryParameters = {
+    fields: ["slug", "title", "subtitle", "publishedAt"],
+    populate: { image: { fields: ["url"] } },
+    pagination: { pageSize: quantity },
+    sort: ["publishedAt:desc"],
+  }
 
-  return fetch(`${cmsBaseUrl}/api/reviews${query}`, {
-    next: { tags: ["reviews"] },
-  })
-    .then(res => res.json())
+  return fetchReviews(queryParameters)
     .then(reviews =>
       reviews.data.map(({ attributes }) => ({
         title: attributes.title,
