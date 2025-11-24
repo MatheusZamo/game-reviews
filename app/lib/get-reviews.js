@@ -1,5 +1,5 @@
-import { cmsBaseUrl } from "./cms-base-url"
 import { fetchReviews } from "./fetch-reviews"
+import { getReviewObject } from "./get-review-object"
 
 const getReviews = async ({ quantity }) => {
   const queryParameters = {
@@ -11,12 +11,9 @@ const getReviews = async ({ quantity }) => {
 
   return fetchReviews(queryParameters)
     .then(reviews =>
-      reviews.data.map(({ attributes }) => ({
-        title: attributes.title,
-        img: `${cmsBaseUrl}${attributes.image.data.attributes.url}`,
-        date: attributes.publishedAt.split("T")[0],
-        path: `/analises/${attributes.slug}`,
-        subtitle: attributes.subtitle,
+      reviews.data.map(review => ({
+        ...getReviewObject(review),
+        path: `/analises/${review.attributes.slug}`,
       }))
     )
     .catch(console.log)

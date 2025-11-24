@@ -1,5 +1,5 @@
-import { cmsBaseUrl } from "./cms-base-url"
 import { fetchReviews } from "./fetch-reviews"
+import { getReviewObject } from "./get-review-object"
 
 const getReview = async slug => {
   const queryParameters = {
@@ -10,18 +10,13 @@ const getReview = async slug => {
   }
 
   return fetchReviews(queryParameters)
-    .then(review => {
-      if (review.data.length === 0) {
+    .then(({ data }) => {
+      if (data.length === 0) {
         return null
       }
-      const { attributes } = review.data[0]
-      return {
-        title: attributes.title,
-        img: `${cmsBaseUrl}${attributes.image.data.attributes.url}`,
-        date: attributes.publishedAt.split("T")[0],
-        content: attributes.body,
-        subtitle: attributes.subtitle,
-      }
+
+      const review = data[0]
+      return { ...getReviewObject(review), content: review.attributes.body }
     })
     .catch(console.log)
 }
