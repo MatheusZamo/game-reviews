@@ -10,7 +10,7 @@ const metadata = {
 const dynamic = "force-dynamic"
 
 const Home = async () => {
-  const reviews = await getReviews({ quantity: 4 })
+  const { reviews } = await getReviews({ quantity: 4 })
 
   return (
     <div className="flex flex-wrap gap-3">

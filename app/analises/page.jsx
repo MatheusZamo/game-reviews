@@ -11,8 +11,8 @@ const metadata = {
 const dynamic = "force-dynamic"
 
 const Reviews = async ({ searchParams }) => {
-  const reviews = await getReviews({ quantity: 8 })
   const currentPage = Number(searchParams.page) || 1
+  const { reviews, page } = await getReviews({ quantity: 8, page: currentPage })
   const previousPageHref = `/analises?page=${currentPage - 1 === 0 ? 1 : currentPage - 1}`
   const nextPageHref = `/analises?page=${currentPage + 1}`
   return (
@@ -22,7 +22,9 @@ const Reviews = async ({ searchParams }) => {
         <Link href={previousPageHref} className="flex items-center">
           <ArrowLeft color="#e2e8f0" size={18} />
         </Link>
-        <span>Página {currentPage}</span>
+        <span>
+          Página {currentPage} de {page}
+        </span>
         <Link href={nextPageHref} className="flex items-center">
           <ArrowRight color="#e2e8f0" size={18} />
         </Link>
