@@ -11,7 +11,7 @@ const getReviews = async ({ quantity, page }) => {
 
   return fetchReviews(queryParameters)
     .then(reviews => ({
-      page: reviews.meta.pagination.pageCount,
+      pageCount: reviews.meta.pagination.pageCount,
       reviews: reviews.data.map(review => ({
         ...getReviewObject(review),
         path: `/analises/${review.attributes.slug}`,
