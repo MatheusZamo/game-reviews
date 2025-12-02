@@ -30,7 +30,7 @@ const SearchBox = ({ reviews }) => {
         aria-label="Assignee"
         displayValue={listOfReview => listOfReview}
         onChange={event => setQuery(event.target.value)}
-        className="bg-slate-700"
+        className="bg-slate-700 border px-2 rounded"
         placeholder="Pesquisar análise"
       />
       <ComboboxOptions
@@ -41,9 +41,9 @@ const SearchBox = ({ reviews }) => {
           <ComboboxOption
             key={listOfReview}
             value={listOfReview}
-            className="data-focus:bg-blue-100"
+            className="data-focus:bg-blue-500"
           >
-            {listOfReview}
+            <span className="block px-2 w-full"> {listOfReview} </span>
           </ComboboxOption>
         ))}
       </ComboboxOptions>

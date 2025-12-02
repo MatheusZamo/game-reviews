@@ -21,7 +21,7 @@ const Reviews = async ({ searchParams }) => {
   return (
     <>
       <Heading1>Análises</Heading1>
-      <div className="flex gap-5">
+      <div className="flex gap-6 py-1">
         <Pagination currentPage={currentPage} pageCount={pageCount} />
         <SearchBox reviews={reviews} />
       </div>
