@@ -23,7 +23,7 @@ const Reviews = async ({ searchParams }) => {
       <Heading1>Análises</Heading1>
       <div className="flex gap-5">
         <Pagination currentPage={currentPage} pageCount={pageCount} />
-        <SearchBox />
+        <SearchBox reviews={reviews} />
       </div>
       <ul className="flex flex-wrap gap-5 mt-3">
         {reviews.map((review, index) => (
