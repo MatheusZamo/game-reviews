@@ -3,6 +3,7 @@ import Heading1 from "@/components/heading1"
 import Image from "next/image"
 import { getReviews } from "../lib/get-reviews"
 import Pagination from "@/components/pagination"
+import SearchBox from "@/components/search-box"
 
 const metadata = {
   title: "Análises",
@@ -20,7 +21,10 @@ const Reviews = async ({ searchParams }) => {
   return (
     <>
       <Heading1>Análises</Heading1>
-      <Pagination currentPage={currentPage} pageCount={pageCount} />
+      <div className="flex gap-5">
+        <Pagination currentPage={currentPage} pageCount={pageCount} />
+        <SearchBox />
+      </div>
       <ul className="flex flex-wrap gap-5 mt-3">
         {reviews.map((review, index) => (
           <li
