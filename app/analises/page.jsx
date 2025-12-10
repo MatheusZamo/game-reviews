@@ -4,6 +4,7 @@ import Image from "next/image"
 import { getReviews } from "../lib/get-reviews"
 import Pagination from "@/components/pagination"
 import SearchBox from "@/components/search-box"
+import { getSearchableReviews } from "../lib/get-searchable-reviews"
 
 const metadata = {
   title: "Análises",
@@ -17,13 +18,13 @@ const Reviews = async ({ searchParams }) => {
     quantity: 8,
     page: currentPage,
   })
-
+  const searchableReviews = await getSearchableReviews()
   return (
     <>
       <Heading1>Análises</Heading1>
       <div className="flex gap-6 py-1">
         <Pagination currentPage={currentPage} pageCount={pageCount} />
-        <SearchBox reviews={reviews} />
+        <SearchBox reviews={searchableReviews} />
       </div>
       <ul className="flex flex-wrap gap-5 mt-3">
         {reviews.map((review, index) => (

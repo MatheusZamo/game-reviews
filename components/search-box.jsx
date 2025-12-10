@@ -10,20 +10,14 @@ import { useRouter } from "next/navigation"
 import { useState } from "react"
 
 const SearchBox = ({ reviews }) => {
-  const listOfReview = reviews.map(review => ({
-    title: review.title,
-    path: review.path,
-  }))
-
   const [query, setQuery] = useState("")
   const router = useRouter()
   const changeInputValue = e => setQuery(e.target.value)
-  const goToReviewPage = review => review && router.push(`${review.path}`)
-
+  const goToReviewPage = review => review && router.push(review.path)
   const filteredReview =
     query === ""
       ? []
-      : listOfReview.filter(review => {
+      : reviews.filter(review => {
           return review.title.toLowerCase().includes(query.toLowerCase())
         })
 
