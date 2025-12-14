@@ -1,5 +1,6 @@
 "use client"
 
+import { getSearchedReviews } from "@/app/lib/get-searched-reviews"
 import {
   Combobox,
   ComboboxInput,
@@ -7,19 +8,22 @@ import {
   ComboboxOptions,
 } from "@headlessui/react"
 import { useRouter } from "next/navigation"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 
-const SearchBox = ({ reviews }) => {
+const SearchBox = () => {
+  const [reviews, setReviews] = useState([])
   const [query, setQuery] = useState("")
   const router = useRouter()
   const changeInputValue = e => setQuery(e.target.value)
   const goToReviewPage = review => review && router.push(review.path)
-  const filteredReview =
-    query === ""
-      ? []
-      : reviews.filter(review => {
-          return review.title.toLowerCase().includes(query.toLowerCase())
-        })
+
+  useEffect(() => {
+    if (query.length > 1) {
+      getSearchedReviews(query).then(setReviews).catch(console.log)
+    } else {
+      setReviews([])
+    }
+  }, [query])
 
   return (
     <Combobox onChange={goToReviewPage}>
@@ -34,7 +38,7 @@ const SearchBox = ({ reviews }) => {
         anchor="bottom start"
         className="border empty:invisible bg-slate-700"
       >
-        {filteredReview.map(review => (
+        {reviews.map(review => (
           <ComboboxOption
             key={review.title}
             value={review}
