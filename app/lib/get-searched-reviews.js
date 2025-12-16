@@ -1,3 +1,5 @@
+import "server-only"
+
 import { fetchReviews } from "./fetch-reviews"
 
 const getSearchedReviews = async query => {
