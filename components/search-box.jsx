@@ -1,6 +1,5 @@
 "use client"
 
-import { getSearchedReviews } from "@/app/lib/get-searched-reviews"
 import {
   Combobox,
   ComboboxInput,
@@ -19,7 +18,10 @@ const SearchBox = () => {
 
   useEffect(() => {
     if (query.length > 1) {
-      getSearchedReviews(query).then(setReviews).catch(console.log)
+      fetch(`/api/webhooks/reviews-search?query=${encodeURIComponent(query)}`)
+        .then(response => response.json())
+        .then(setReviews)
+        .catch(console.log)
     } else {
       setReviews([])
     }
