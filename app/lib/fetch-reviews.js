@@ -1,3 +1,5 @@
+import "server-only"
+
 const { stringify } = require("qs")
 const { cmsBaseUrl } = require("./cms-base-url")
 

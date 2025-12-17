@@ -1,3 +1,5 @@
+import "server-only"
+
 const { cmsBaseUrl } = require("./cms-base-url")
 
 const getReviewObject = review => ({

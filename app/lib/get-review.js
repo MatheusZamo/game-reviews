@@ -1,3 +1,4 @@
+import "server-only"
 import { fetchReviews } from "./fetch-reviews"
 import { getReviewObject } from "./get-review-object"
 
