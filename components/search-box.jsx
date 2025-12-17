@@ -18,10 +18,14 @@ const SearchBox = () => {
 
   useEffect(() => {
     if (query.length > 1) {
-      fetch(`/api/webhooks/reviews-search?query=${encodeURIComponent(query)}`)
+      const controller = new AbortController()
+      const url = `/api/webhooks/reviews-search?query=${encodeURIComponent(query)}`
+      fetch(url, { signal: controller.signal })
         .then(response => response.json())
         .then(setReviews)
         .catch(console.log)
+
+      return () => controller.abort()
     } else {
       setReviews([])
     }
