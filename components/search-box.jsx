@@ -8,18 +8,20 @@ import {
 } from "@headlessui/react"
 import { useRouter } from "next/navigation"
 import { useEffect, useState } from "react"
+import { useDebounce } from "use-debounce"
 
 const SearchBox = () => {
   const [reviews, setReviews] = useState([])
   const [query, setQuery] = useState("")
+  const [debouncedQuery] = useDebounce(query, 500)
   const router = useRouter()
   const changeInputValue = e => setQuery(e.target.value)
   const goToReviewPage = review => review && router.push(review.path)
 
   useEffect(() => {
-    if (query.length > 1) {
+    if (debouncedQuery.length > 1) {
       const controller = new AbortController()
-      const url = `/api/webhooks/reviews-search?query=${encodeURIComponent(query)}`
+      const url = `/api/webhooks/reviews-search?query=${encodeURIComponent(debouncedQuery)}`
       fetch(url, { signal: controller.signal })
         .then(response => response.json())
         .then(setReviews)
@@ -29,7 +31,7 @@ const SearchBox = () => {
     } else {
       setReviews([])
     }
-  }, [query])
+  }, [debouncedQuery])
 
   return (
     <Combobox onChange={goToReviewPage}>
