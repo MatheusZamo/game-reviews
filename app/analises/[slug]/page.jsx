@@ -5,6 +5,9 @@ import Image from "next/image"
 import { getReview } from "@/app/lib/get-review"
 import ShareReviewButton from "@/components/share-review-button"
 import { notFound } from "next/navigation"
+import { MessageSquareText } from "lucide-react"
+import CommentForm from "@/components/comment-form"
+import CommentList from "@/components/comment-list"
 
 const dynamic = "force-dynamic"
 
@@ -41,6 +44,13 @@ const GameReview = async ({ params }) => {
         className="prose text-slate-200 prose-strong:text-slate-200 prose-h3:text-slate-200"
         dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(parse(content)) }}
       />
+      <section className="border-solid border-slate-500 border-t max-w-screen-sm mt-6 py-3">
+        <h2 className="font-bold flex gap-2 items-center text-xl">
+          <MessageSquareText /> Comentários
+        </h2>
+        <CommentForm title={title} />
+        <CommentList />
+      </section>
     </>
   )
 }
