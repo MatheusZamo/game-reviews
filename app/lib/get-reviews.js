@@ -1,30 +1,24 @@
-import { stringify } from "qs"
+import "server-only"
+import { fetchReviews } from "./fetch-reviews"
+import { getReviewObject } from "./get-review-object"
 
-const getReviews = async ({ quantity }) => {
-  const query = "?" + stringify({
-    fields: ['slug', 'title', 'subtitle', 'publishedAt'],
-    populate: { image: { fields: ['url'] } },
-    pagination: { pageSize: quantity },
-    sort: ['publishedAt:desc']
-}, { encodeValuesOnly: true })
+const getReviews = async ({ quantity, page }) => {
+  const queryParameters = {
+    fields: ["slug", "title", "subtitle", "publishedAt"],
+    populate: { image: { fields: ["url"] } },
+    pagination: { pageSize: quantity, page },
+    sort: ["publishedAt:desc"],
+  }
 
-const cmsBaseUrl = 'http://localhost:1337'
-
-    return(
-     fetch(`${cmsBaseUrl}/api/reviews${query}`, { next: { revalidate: 0 } })
-      .then(res => res.json())
-      .then(reviews => reviews.data.map(({ attributes }) => ({
-        title: attributes.title,
-        img: `${cmsBaseUrl}${attributes.image.data.attributes.url}`,
-        date: attributes.publishedAt.split('T')[0],
-        path: `/analises/${attributes.slug}`,
-        subtitle: attributes.subtitle
-        })))
+  return fetchReviews(queryParameters)
+    .then(reviews => ({
+      pageCount: reviews.meta.pagination.pageCount,
+      reviews: reviews.data.map(review => ({
+        ...getReviewObject(review),
+        path: `/analises/${review.attributes.slug}`,
+      })),
+    }))
     .catch(console.log)
-    )
 }
-   
-
-
 
 export { getReviews }

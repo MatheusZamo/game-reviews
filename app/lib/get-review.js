@@ -1,34 +1,25 @@
-import { stringify } from "qs"
+import "server-only"
+import { fetchReviews } from "./fetch-reviews"
+import { getReviewObject } from "./get-review-object"
 
-const cmsBaseUrl = 'http://localhost:1337'
-
-const getReview = async (slug) => {
-  const query = "?" + stringify({
+const getReview = async slug => {
+  const queryParameters = {
     filters: { slug: { $eq: slug } },
-    fields: ['slug', 'title', 'subtitle', 'publishedAt', 'body'],
-    populate: { image: { fields: ['url'] } },
+    fields: ["slug", "title", "subtitle", "publishedAt", "body"],
+    populate: { image: { fields: ["url"] } },
     pagination: { pageSize: 1, withCount: false },
-  }, { encodeValuesOnly: true })
+  }
 
-
- return  (
-  fetch(`${cmsBaseUrl}/api/reviews${query}`, { next: { revalidate: 0 } })
-    .then(res => res.json())
-    .then(review => {
-      const { attributes } = review.data[0]
-
-      return {
-        title: attributes.title,
-        img: `${cmsBaseUrl}${attributes.image.data.attributes.url}`,
-        date: attributes.publishedAt.split('T')[0],
-        content: attributes.body,
-        subtitle: attributes.subtitle
+  return fetchReviews(queryParameters)
+    .then(({ data }) => {
+      if (data.length === 0) {
+        return null
       }
+
+      const review = data[0]
+      return { ...getReviewObject(review), content: review.attributes.body }
     })
     .catch(console.log)
- )
-
 }
-
 
 export { getReview }
