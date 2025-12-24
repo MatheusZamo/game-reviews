@@ -49,7 +49,7 @@ const GameReview = async ({ params }) => {
           <MessageSquareText /> Comentários
         </h2>
         <CommentForm title={title} />
-        <CommentList />
+        <CommentList slug={params.slug} />
       </section>
     </>
   )
