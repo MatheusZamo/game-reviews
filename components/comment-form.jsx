@@ -1,8 +1,9 @@
+import { prisma } from "@/app/lib/prisma"
+
 const CommentForm = ({ slug, title }) => {
   const createComment = async formData => {
     "use server"
 
-    const prisma = new PrismaClient()
     const { user, message } = Object.fromEntries(formData)
 
     await prisma.comment.create({

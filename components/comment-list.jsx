@@ -1,9 +1,7 @@
+import { prisma } from "@/app/lib/prisma"
 import { UserRound } from "lucide-react"
-import { PrismaClient } from "@prisma/client"
 
 const CommentList = async ({ slug }) => {
-  const prisma = new PrismaClient()
-
   const comments = await prisma.comment.findMany({
     where: { slug },
     orderBy: { createdAt: "desc" },
