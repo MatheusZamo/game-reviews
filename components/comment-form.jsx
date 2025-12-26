@@ -1,4 +1,5 @@
 import { prisma } from "@/app/lib/prisma"
+import { revalidatePath } from "next/cache"
 
 const CommentForm = ({ slug, title }) => {
   const createComment = async formData => {
@@ -13,6 +14,8 @@ const CommentForm = ({ slug, title }) => {
         message,
       },
     })
+
+    revalidatePath(`/analises/${slug}`)
   }
   return (
     <form
