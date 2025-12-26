@@ -48,7 +48,7 @@ const GameReview = async ({ params }) => {
         <h2 className="font-bold flex gap-2 items-center text-xl">
           <MessageSquareText /> Comentários
         </h2>
-        <CommentForm title={title} />
+        <CommentForm slug={params.slug} title={title} />
         <CommentList slug={params.slug} />
       </section>
     </>
