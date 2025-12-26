@@ -6,6 +6,7 @@ const CommentList = async ({ slug }) => {
 
   const comments = await prisma.comment.findMany({
     where: { slug },
+    orderBy: { createdAt: "desc" },
   })
 
   return comments.length > 0 ? (
