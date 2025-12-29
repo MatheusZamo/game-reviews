@@ -3,22 +3,39 @@
 import { prisma } from "@/app/lib/prisma"
 import { revalidatePath } from "next/cache"
 
-const createComment = async formData => {
-  const { user, message, slug } = Object.fromEntries(formData)
+const getErrorMessage = data => {
+  const validations = [
+    { condition: !data.user, message: "Preencha o campo com seu nome" },
+    {
+      condition: data.user && data.user.length > 50,
+      message: "Deixe o nome com no máximo 50 caracteres",
+    },
+    {
+      condition: !data.message,
+      message: "Preencha o campo com seu comentário",
+    },
+    {
+      condition: data.message && data.message.length > 500,
+      message: "Deixe o comentário com no máximo 500 caracteres",
+    },
+  ]
 
-  if (!user || !message) {
-    return { isError: true, error: { message: "Preencha todos os campos " } }
+  return validations.find(validation => validation.condition)?.message
+}
+
+const createComment = async formData => {
+  const rawFormData = Object.fromEntries(formData)
+  const errorMessage = getErrorMessage(rawFormData)
+
+  if (errorMessage) {
+    return { isError: true, error: { message: errorMessage } }
   }
 
   await prisma.comment.create({
-    data: {
-      slug,
-      user,
-      message,
-    },
+    data: rawFormData,
   })
 
-  revalidatePath(`/analises/${slug}`)
+  revalidatePath(`/analises/${rawFormData.slug}`)
   return { isError: false }
 }
 
