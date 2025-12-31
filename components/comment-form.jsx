@@ -1,6 +1,6 @@
 "use client"
 
-import createComment from "@/app/actions/create-comments"
+import createComment from "@/actions/create-comments"
 import { useState } from "react"
 
 const CommentForm = ({ slug, title }) => {
