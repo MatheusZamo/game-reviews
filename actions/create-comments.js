@@ -1,5 +1,6 @@
 "use server"
 
+import DOMPurify from "isomorphic-dompurify"
 import { prisma } from "@/app/lib/prisma"
 import { revalidatePath } from "next/cache"
 
@@ -24,7 +25,10 @@ const getErrorMessage = data => {
 }
 
 const createComment = async formData => {
-  const rawFormData = Object.fromEntries(formData)
+  const rawFormData = Array.from(formData, ([key]) => key).reduce(
+    (acc, key) => ({ ...acc, [key]: DOMPurify.sanitize(formData.get(key)) }),
+    {}
+  )
   const errorMessage = getErrorMessage(rawFormData)
 
   if (errorMessage) {
