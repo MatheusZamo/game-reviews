@@ -8,6 +8,8 @@ import { notFound } from "next/navigation"
 import { MessageSquareText } from "lucide-react"
 import CommentForm from "@/components/comment-form"
 import CommentList from "@/components/comment-list"
+import { Suspense } from "react"
+import { SkeletonList } from "@/components/skeleton-list"
 
 const dynamic = "force-dynamic"
 
@@ -49,7 +51,9 @@ const GameReview = async ({ params }) => {
           <MessageSquareText /> Comentários
         </h2>
         <CommentForm slug={params.slug} title={title} />
-        <CommentList slug={params.slug} />
+        <Suspense fallback={<SkeletonList />}>
+          <CommentList slug={params.slug} />
+        </Suspense>
       </section>
     </>
   )

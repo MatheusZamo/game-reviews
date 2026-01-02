@@ -1,16 +1,19 @@
 "use client"
 
-import createComment from "@/app/actions/create-comments"
+import createComment from "@/actions/create-comments"
 import { useState } from "react"
 
 const CommentForm = ({ slug, title }) => {
   const [errorMessage, setErrorMessage] = useState(null)
+  const [isSubmitting, setIsSubmitting] = useState(false)
 
   const handleSubmit = async e => {
     e.preventDefault()
+    setIsSubmitting(true)
     const formData = new FormData(e.target)
     const result = await createComment(formData)
     setErrorMessage(result.isError ? result.error.message : null)
+    setIsSubmitting(false)
 
     if (!result.isError) {
       e.target.reset()
@@ -45,10 +48,11 @@ const CommentForm = ({ slug, title }) => {
       </div>
       {errorMessage && <p className="text-red-500">{errorMessage}</p>}
       <button
+        disabled={isSubmitting}
         type="submit"
-        className="bg-indigo-600 rounded px-2 py-1 self-center text-slate-50 w-32 hover:bg-indigo-500"
+        className="disabled:bg-indigo-400 bg-indigo-600 rounded px-2 py-1 self-center text-slate-50 w-32 hover:bg-indigo-500"
       >
-        Enviar
+        {isSubmitting ? "Salvando" : "Enviar"}
       </button>
     </form>
   )
