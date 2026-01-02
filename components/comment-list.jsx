@@ -2,7 +2,6 @@ import { prisma } from "@/app/lib/prisma"
 import { UserRound } from "lucide-react"
 
 const CommentList = async ({ slug }) => {
-  await new Promise(resolve => setTimeout(resolve, 3000))
   const comments = await prisma.comment.findMany({
     where: { slug },
     orderBy: { createdAt: "desc" },
