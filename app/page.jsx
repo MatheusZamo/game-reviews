@@ -1,6 +1,6 @@
 import Link from "next/link"
 import Image from "next/image"
-import { getReviews } from "./lib/get-reviews"
+import { getReviews } from "../lib/get-reviews"
 
 const metadata = {
   description:

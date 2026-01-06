@@ -1,7 +1,7 @@
 "use server"
 
 import DOMPurify from "isomorphic-dompurify"
-import { prisma } from "@/app/lib/prisma"
+import { prisma } from "@/lib/prisma"
 import { revalidatePath } from "next/cache"
 
 const getErrorMessage = data => {

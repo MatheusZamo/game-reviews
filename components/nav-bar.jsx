@@ -19,6 +19,11 @@ const NavBar = () => (
           Análises
         </Link>
       </li>
+      <li>
+        <Link href="/login" className="hover:text-sky-500">
+          Login
+        </Link>
+      </li>
     </ul>
   </nav>
 )

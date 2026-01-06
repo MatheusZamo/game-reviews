@@ -1,4 +1,4 @@
-import { prisma } from "@/app/lib/prisma"
+import { prisma } from "@/lib/prisma"
 import { UserRound } from "lucide-react"
 
 const CommentList = async ({ slug }) => {
