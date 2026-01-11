@@ -1,7 +1,9 @@
+import { signIn } from "../lib/auth"
+
 const LoginForm = () => {
   const handleLogin = async () => {
     "use server"
-    console.log("executou server action")
+    await signIn("google", { redirectTo: "/analises" })
   }
   return (
     <form action={handleLogin}>
