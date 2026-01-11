@@ -1,5 +1,6 @@
 import Link from "next/link"
 import { auth } from "../lib/auth"
+import { LogoutForm } from "../components/logout-form"
 
 const NavBar = async () => {
   const session = await auth()
@@ -24,7 +25,7 @@ const NavBar = async () => {
         </li>
         <li>
           {session?.user ? (
-            session.user.name
+            <LogoutForm />
           ) : (
             <Link href="/login" className="hover:text-sky-500">
               Login
