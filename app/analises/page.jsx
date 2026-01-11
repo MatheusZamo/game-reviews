@@ -1,9 +1,9 @@
 import Link from "next/link"
-import Heading1 from "@/components/heading1"
+import Heading1 from "../../components/heading1"
 import Image from "next/image"
 import { getReviews } from "../../lib/get-reviews"
-import Pagination from "@/components/pagination"
-import SearchBox from "@/components/search-box"
+import Pagination from "../../components/pagination"
+import SearchBox from "../../components/search-box"
 
 const metadata = {
   title: "Análises",
