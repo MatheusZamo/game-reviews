@@ -3,7 +3,7 @@ import { signIn } from "../lib/auth"
 const LoginForm = () => {
   const handleLogin = async () => {
     "use server"
-    await signIn("google", { redirectTo: "/analises" })
+    await signIn("google")
   }
   return (
     <form action={handleLogin}>
