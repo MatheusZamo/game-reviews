@@ -1,3 +1,4 @@
+import Image from "next/image"
 import { signIn } from "../lib/auth"
 
 const LoginForm = () => {
@@ -7,8 +8,14 @@ const LoginForm = () => {
   }
   return (
     <form action={handleLogin}>
-      <button type="submit" className="bg-indigo-600 rounded px-4 py-2 mt-2">
-        Entrar com o Google
+      <button className="flex items-center gap-6 text-lg border border-primary-300 px-8 py-4 font-medium rounded">
+        <Image
+          src="https://authjs.dev/img/providers/google.svg"
+          alt="Logo do Google"
+          height="24"
+          width="24"
+        />
+        <span>Entrar com Google</span>
       </button>
     </form>
   )

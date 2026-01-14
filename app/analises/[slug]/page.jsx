@@ -56,7 +56,7 @@ const GameReview = async ({ params }) => {
         {session?.user ? (
           <CommentForm slug={params.slug} title={title} />
         ) : (
-          <div className="bg-slate-700 mt-3 px-3 py-4 text-center flex flex-col gap-1">
+          <div className="bg-slate-700 mt-3 px-3 py-4 text-center flex flex-col gap-3 items-center">
             <h3>Faça login para postar seu comentário</h3>
             <LoginForm />
           </div>
