@@ -1,15 +1,18 @@
 import { parse } from "marked"
 import DOMPurify from "isomorphic-dompurify"
-import Heading1 from "@/components/heading1"
+import Heading1 from "../../../components/heading1"
 import Image from "next/image"
-import { getReview } from "@/app/lib/get-review"
-import ShareReviewButton from "@/components/share-review-button"
+import { getReview } from "../../../lib/get-review"
+import ShareReviewButton from "../../../components/share-review-button"
 import { notFound } from "next/navigation"
 import { MessageSquareText } from "lucide-react"
-import CommentForm from "@/components/comment-form"
-import CommentList from "@/components/comment-list"
+import CommentForm from "../../../components/comment-form"
+import CommentList from "../../../components/comment-list"
 import { Suspense } from "react"
-import { SkeletonList } from "@/components/skeleton-list"
+import { SkeletonList } from "../../../components/skeleton-list"
+import { auth } from "../../../lib/auth"
+import { LoginForm } from "../../../components/login-form"
+import { getFirstName } from "../../../lib/get-first-name"
 
 const dynamic = "force-dynamic"
 
@@ -21,6 +24,8 @@ const generateMetadata = async ({ params }) => {
 }
 
 const GameReview = async ({ params }) => {
+  const session = await auth()
+  const firstName = getFirstName(session?.user.name)
   const review = await getReview(params.slug)
   if (!review) notFound()
 
@@ -50,7 +55,15 @@ const GameReview = async ({ params }) => {
         <h2 className="font-bold flex gap-2 items-center text-xl">
           <MessageSquareText /> Comentários
         </h2>
-        <CommentForm slug={params.slug} title={title} />
+        {session?.user ? (
+          <CommentForm slug={params.slug} title={title} firstName={firstName} />
+        ) : (
+          <div className="bg-slate-700 mt-3 px-3 py-4 text-center flex flex-col gap-3 items-center">
+            <h3>Faça login para postar seu comentário</h3>
+            <LoginForm />
+          </div>
+        )}
+
         <Suspense fallback={<SkeletonList />}>
           <CommentList slug={params.slug} />
         </Suspense>

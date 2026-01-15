@@ -1,4 +1,4 @@
-import { getSearchedReviews } from "@/app/lib/get-searched-reviews"
+import { getSearchedReviews } from "@/lib/get-searched-reviews"
 import { NextResponse } from "next/server"
 
 const GET = async request => {

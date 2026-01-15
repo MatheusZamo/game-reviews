@@ -1,4 +1,4 @@
-import Heading1 from "@/components/heading1"
+import Heading1 from "../../components/heading1"
 
 const metadata = {
   title: "Sobre",

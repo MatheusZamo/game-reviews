@@ -1,4 +1,5 @@
-import { prisma } from "@/app/lib/prisma"
+import { getFirstName } from "../lib/get-first-name"
+import { prisma } from "../lib/prisma"
 import { UserRound } from "lucide-react"
 
 const CommentList = async ({ slug }) => {
@@ -15,7 +16,7 @@ const CommentList = async ({ slug }) => {
           className="border-b border-slate-500 px-3 py-2 last:border-none odd:bg-slate-700"
         >
           <div className="flex gap-3 pb-1 text-slate-400">
-            <UserRound /> {comment.user}
+            <UserRound /> {getFirstName(comment.user)}
           </div>
           <p className="italic">{comment.message}</p>
         </li>

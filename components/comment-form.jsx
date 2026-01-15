@@ -1,9 +1,9 @@
 "use client"
 
-import createComment from "@/actions/create-comments"
+import createComment from "../actions/create-comments"
 import { useState } from "react"
 
-const CommentForm = ({ slug, title }) => {
+const CommentForm = ({ slug, title, firstName }) => {
   const [errorMessage, setErrorMessage] = useState(null)
   const [isSubmitting, setIsSubmitting] = useState(false)
 
@@ -28,14 +28,9 @@ const CommentForm = ({ slug, title }) => {
         Jogou <strong>{title}</strong>? Dê a sua opinião!
       </p>
       <input type="hidden" name="slug" value={slug} />
-      <div className="flex items-center">
-        <label className="shrink-0 flex items-center space-x-2">
-          <span className="w-32">Seu nome</span>
-          <input
-            name="user"
-            className="border px-2 py-1 rounded w-48 ml-2 bg-slate-800"
-          />
-        </label>
+      <div className="flex items-center space-x-2">
+        <span className="w-32">Seu nome</span>
+        <span>{firstName}</span>
       </div>
       <div className="flex items-center">
         <label className="shrink-0 flex items-center space-x-2">
