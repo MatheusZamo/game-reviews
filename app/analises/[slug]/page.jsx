@@ -12,6 +12,7 @@ import { Suspense } from "react"
 import { SkeletonList } from "../../../components/skeleton-list"
 import { auth } from "../../../lib/auth"
 import { LoginForm } from "../../../components/login-form"
+import { getFirstName } from "../../../lib/get-first-name"
 
 const dynamic = "force-dynamic"
 
@@ -24,6 +25,7 @@ const generateMetadata = async ({ params }) => {
 
 const GameReview = async ({ params }) => {
   const session = await auth()
+  const firstName = getFirstName(session?.user.name)
   const review = await getReview(params.slug)
   if (!review) notFound()
 
@@ -54,7 +56,7 @@ const GameReview = async ({ params }) => {
           <MessageSquareText /> Comentários
         </h2>
         {session?.user ? (
-          <CommentForm slug={params.slug} title={title} />
+          <CommentForm slug={params.slug} title={title} firstName={firstName} />
         ) : (
           <div className="bg-slate-700 mt-3 px-3 py-4 text-center flex flex-col gap-3 items-center">
             <h3>Faça login para postar seu comentário</h3>

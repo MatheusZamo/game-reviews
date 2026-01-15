@@ -3,14 +3,10 @@
 import DOMPurify from "isomorphic-dompurify"
 import { prisma } from "../lib/prisma"
 import { revalidatePath } from "next/cache"
+import { auth } from "../lib/auth"
 
 const getErrorMessage = data => {
   const validations = [
-    { condition: !data.user, message: "Preencha o campo com seu nome" },
-    {
-      condition: data.user && data.user.length > 50,
-      message: "Deixe o nome com no máximo 50 caracteres",
-    },
     {
       condition: !data.message,
       message: "Preencha o campo com seu comentário",
@@ -25,9 +21,18 @@ const getErrorMessage = data => {
 }
 
 const createComment = async formData => {
+  const session = await auth()
+
+  if (!session?.user) {
+    return {
+      isError: true,
+      error: { message: "Acesso não autorizado. Por favor, faça login." },
+    }
+  }
+  const userName = { user: session.user.name }
   const rawFormData = Array.from(formData, ([key]) => key).reduce(
     (acc, key) => ({ ...acc, [key]: DOMPurify.sanitize(formData.get(key)) }),
-    {}
+    userName
   )
   const errorMessage = getErrorMessage(rawFormData)
 
